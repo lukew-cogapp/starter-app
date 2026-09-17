@@ -36,5 +36,9 @@
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
     "vitest": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukew-cogapp/starter-app.git"
   }
 }
