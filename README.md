@@ -1,7 +1,7 @@
 # starter-app
 
 React SPA template: Vite, TypeScript (strict), Tailwind v4, Biome, Vitest, Lefthook,
-GitHub Actions CI and GitHub Pages deploy.
+GitHub Actions CI and GitHub Pages deploy. Installable to a phone home screen.
 
 ## Use
 
@@ -11,6 +11,9 @@ Click **Use this template** on GitHub, then:
 npm install   # also installs the Lefthook pre-commit hooks
 npm run dev
 ```
+
+Point the template at your own repo by updating the `repository` field in
+`package.json`; the footer link reads from it.
 
 ## Scripts
 
@@ -25,6 +28,16 @@ npm run dev
 | `npm run lint` | Biome check |
 | `npm run format` | Biome check with fixes applied |
 | `npm run typecheck` | `tsc -b --noEmit` |
+
+## What's included
+
+- **`src/en.ts`** holds the UI copy, so strings are changed in one place.
+- **`useLocalStorage`** is a typed hook returning `[value, setValue, remove]`. It
+  survives storage being blocked or full, and syncs across open tabs. The counter on
+  the page is the worked example.
+- **A web app manifest and icons**, so the site installs to an Android or iOS home
+  screen and opens without browser chrome. There is no service worker, so it needs a
+  connection.
 
 ## Deploying
 
