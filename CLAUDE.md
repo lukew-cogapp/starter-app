@@ -51,9 +51,13 @@ After significant work run `npm run format`, `npm run typecheck` and `npm test`.
 wrapped because storage throws, rather than returning null, in Safari private mode and
 wherever a site is blocked from storing data.
 
-`remove()` sets a ref that makes the write effect skip one run. Without it the reset to
-the initial value re-triggers that effect and writes the key straight back, so the
-removal never sticks.
+Writes happen inside the setters, not in an effect. An effect cannot tell a write apart
+from a removal that restores the initial value, so an effect-based version either fails
+to remove or swallows the write that follows a removal.
+
+Keys are namespaced with `__APP_KEY__` (the package name). Every project site under one
+GitHub user shares the `<user>.github.io` origin and therefore one localStorage, so an
+unprefixed key collides with every other app deployed from that account.
 
 ## The repo URL
 
@@ -80,3 +84,38 @@ in `index.html`, so icon or name changes belong in both places.
 
 There is no service worker, so the app does not work offline. Adding one means taking
 on a cache-invalidation cycle on every deploy; do it only when asked.
+
+## Working on this repo
+
+- Use the package manager for dependencies (`npm install` / `npm uninstall`) rather than
+  hand-editing `package.json`, so versions resolve properly. Editing scripts, config and
+  other fields by hand is fine.
+- Don't start the dev server; that is the developer's to run.
+- After significant work, run `npm run format`, `npm run typecheck` and `npm test`, and
+  fix what they report before calling the work done.
+- If a pre-commit hook fails, read the output and fix the cause. Don't retry until it
+  passes by chance or work around the hook.
+- A code change that invalidates the docs (this file, the README, a comment) means
+  updating them in the same commit. Pure internal refactors with no observable change are
+  the exception.
+
+## Comments
+
+Write the one thing a reader cannot infer from the code, next to the code it governs, and
+explain *why*. Default to no comment: write the code first, then add one only where you
+can name what a competent reader would otherwise get wrong. No banner rules, no markdown
+headings in comments, and no comment that restates the signature.
+
+## Commits
+
+One self-contained change per commit, small enough to review at a glance. Imperative
+subject of roughly 50 characters or less, no ticket id in the subject. Add a body only
+when the *why* is not obvious, kept to a few sentences: it says why the change exists, not
+what the diff already shows. Never add AI or Co-Authored-By attribution.
+
+## Prose
+
+This applies to code comments, docs, commit messages and PR text alike. Name the thing,
+say what it does, stop. Plain nouns and verbs, a fact rather than an adjective about the
+fact. No em-dashes: use a full stop, a comma, parentheses or a colon. Avoid the marketing
+register (seamless, robust, leverage, crucial) and filler intensifiers.

@@ -12,8 +12,17 @@ npm install   # also installs the Lefthook pre-commit hooks
 npm run dev
 ```
 
-Point the template at your own repo by updating the `repository` field in
-`package.json`; the footer link reads from it.
+### Renaming
+
+Update these, then `npm test` to confirm nothing still points at the template:
+
+| Where | What |
+| --- | --- |
+| `package.json` | `name` (also namespaces the localStorage keys) and `repository` (the footer link) |
+| `index.html` | `<title>` and `apple-mobile-web-app-title` |
+| `vite.config.ts` | the manifest `name`, `short_name` and `description` |
+| `src/en.ts` | `appName` and the rest of the UI copy |
+| `public/` | the icons and `favicon.svg` |
 
 ## Scripts
 
