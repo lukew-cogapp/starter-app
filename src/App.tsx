@@ -2,7 +2,7 @@ import { en } from './en'
 import { useLocalStorage } from './useLocalStorage'
 
 export default function App() {
-  const [count, setCount, resetCount] = useLocalStorage('starter:count', 0)
+  const [count, setCount, resetCount] = useLocalStorage(`${__APP_KEY__}:count`, 0)
 
   return (
     <div className="flex min-h-dvh flex-col bg-white text-slate-900">
