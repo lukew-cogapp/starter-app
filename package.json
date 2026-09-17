@@ -40,5 +40,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lukew-cogapp/starter-app.git"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }
